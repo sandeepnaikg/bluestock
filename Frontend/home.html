@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2><span class="avatar1">BF</span>Bluestock Fintech</h2>
+            <hr>
+            <ul>
+                <p>MENU</p>
+                <li><span class="icon">📊</span> Dashboard</li>
+                <li><span class="icon">📈</span> Manage IPO</li>
+                <li><span class="icon">📝</span> IPO Subscription</li>
+                <li><span class="icon">✅</span> IPO Allotment</li>
+
+                <p>OTHERS</p>
+                <li><span class="icon">⚙️</span> Settings</li>
+                <li><span class="icon">🖥️</span> API Manager</li>
+                <li><span class="icon">👤</span> Accounts</li>
+                <li><span class="icon">❓</span> Help</li>
+
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search">
+                    <span class="search-icon">🔍</span>
+                </div>
+                <div class="user-info">
+                    <div class="profile">
+                        <span class="avatar" id="user-avatar"></span>
+                        <span id="user-name"></span>
+                        <span class="dropdown-arrow">▼</span>
+                    </div>
+
+                    <div class="notification">
+                        <span class="bell-icon">🔔</span>
+                        <span class="notification-dot"></span>
+                    </div>
+                </div>
+            </header>
+            <h1> Dashboard</h1>
+            <section class="dashboard-content">
+                <div class="ipo-dashboard">
+                    <p class="I-text">IPO Dashboard India</p>
+                    <p class="I-text2 "> <span class="gain-value">⬆ 20</span> IPO in Gain</p>
+                    <div class="circles-container">
+                        <div class="circle total large orange">
+                            <span class="number">30</span>
+                            <span class="label">Total IPO</span>
+                        </div>
+                        <div class="circle gain medium blue">
+                            <span class="number">20</span>
+                            <span class="label">IPO in Gain</span>
+                        </div>
+                        <div class="circle loss small purple">
+                            <span class="number">9</span>
+                            <span class="label">IPO in Loss</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="quick-links">
+
+                    <p>Quick Links</p>
+                    <p class="subtext">Adipiscing elit, sed do eiusmod tempor</p>
+
+                    <div class="link-item">
+                        <img src="./NSE.png" alt="NSE India">
+                        <span>NSE India</span>
+                        <a href="https://www.nseindia.com" target="_blank">Visit Now</a>
+
+
+
+
+                    </div>
+
+                    <div class="link-item">
+                        <img src="./BSE.png" alt="BSE India">
+                        <span>BSE India</span>
+                        <a href="https://www.bseindia.com/" target="_blank">Visit Now</a>
+
+                    </div>
+
+                    <div class="link-item">
+                        <img src="./SEBI.png" alt="SEBI">
+                        <span>SEBI</span>
+                        <a href="https://www.sebi.gov.in/" target="_blank">Visit Now</a>
+
+                    </div>
+
+                    <div class="link-item">
+                        <img src="./MC.png" alt="Money Control">
+                        <span>Money Control</span>
+                        <a href="https://www.moneycontrol.com/promo/mc_interstitial_dfp.php?size=1280x540" target="_blank">Visit Now</a>
+
+                    </div>
+
+                </div>
+
+                <div class="main-board-ipo">
+                    <div class="ipo-container">
+                        <div class="header">
+                            <p>Main Board IPO</p>
+                            <button class="report-btn">View Report</button>
+                        </div>
+                        <p class="subtext">From 01 Jan 2024</p>
+
+                        <div class="chart-container">
+                            <svg width="120" height="120" viewBox="0 0 36 36" class="donut">
+                                <!-- Background Circle -->
+                                <circle class="donut-ring" cx="18" cy="18" r="15.9155" fill="transparent"
+                                    stroke="#e5e7eb" stroke-width="3"></circle>
+
+                                <!-- Donut Chart Segments -->
+                                <circle class="donut-segment segment-1" cx="18" cy="18" r="15.9155" fill="transparent"
+                                    stroke="#6253b5" stroke-width="3" stroke-dasharray="40 60" stroke-dashoffset="0">
+                                </circle>
+                                <circle class="donut-segment segment-2" cx="18" cy="18" r="15.9155" fill="transparent"
+                                    stroke="#9a8dd9" stroke-width="3" stroke-dasharray="30 70" stroke-dashoffset="-40">
+                                </circle>
+
+                                <!-- Clickable Area -->
+                                <circle class="donut-overlay" cx="18" cy="18" r="15.9155" fill="transparent"></circle>
+                            </svg>
+
+                            <!-- Popup Box -->
+                            <div class="popup-box" id="popup">
+                                <p class="popup-title">Afternoon</p>
+                                <p class="popup-subtitle">IPO NSE & BSE</p>
+                                <p class="popup-value">15</p>
+                            </div>
+                        </div>
+
+                        <!-- Legends -->
+                        <div class="legend">
+                            <span class="dot dot-1"></span> Upcomming <span class="value">15</span>
+                            <span class="dot dot-2"></span> New Listed <span class="value">25</span>
+                            <span class="dot dot-3"></span> Ongoing <span class="value">2</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Toggle sidebar menu items
+            document.querySelectorAll(".sidebar ul li").forEach(item => {
+                item.addEventListener("click", () => {
+                    document.querySelectorAll(".sidebar ul li").forEach(li => li.classList.remove("active"));
+                    item.classList.add("active");
+
+                    // Clear main content and set heading
+                    const mainContent = document.querySelector(".dashboard-content");
+
+                    if (item.textContent === "Dashboard") {
+                        location.reload(); // Reloads the page to restore the default dashboard
+                    } else {
+                        mainContent.innerHTML = `<h1>${item.textContent}</h1>`;
+                    }
+
+                });
+            });
+
+            // Search bar functionality with button click
+            const searchBar = document.querySelector(".search-bar input");
+            const searchButton = document.querySelector(".search-icon");
+
+            // When the button is clicked, filter sidebar menu items
+            searchButton.addEventListener("click", function () {
+                let searchTerm = searchBar.value.toLowerCase();
+                document.querySelectorAll(".sidebar ul li").forEach(item => {
+                    item.style.display = item.textContent.toLowerCase().includes(searchTerm) ? "block" : "none";
+                });
+            });
+
+            // Notification icon click event
+            document.querySelector(".notification").addEventListener("click", function () {
+                alert("You have new notifications!");
+            });
+
+            // Donut chart interaction
+            const popup = document.getElementById("popup");
+            const overlay = document.querySelector(".donut-overlay");
+            overlay.addEventListener("mouseenter", () => popup.style.display = "block");
+            overlay.addEventListener("mouseleave", () => popup.style.display = "none");
+
+            // Quick links hover effect
+            document.querySelectorAll(".link-item").forEach(item => {
+                item.addEventListener("mouseenter", () => item.style.backgroundColor = "#f3f4f6");
+                item.addEventListener("mouseleave", () => item.style.backgroundColor = "white");
+            });
+
+            // Add images dynamically
+            const images = ["nse.jpg", "bse.jpg", "sebi.jpg", "moneycontrol.jpg"];
+            document.querySelectorAll(".link-item img").forEach((img, index) => {
+                img.src = images[index] || "default.jpg";
+            });
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const fullName = localStorage.getItem("fullName") || "User";
+
+                const avatarElement = document.getElementById("user-avatar");
+                const nameElement = document.getElementById("user-name");
+
+                avatarElement.textContent = fullName.charAt(0).toUpperCase(); // First letter as avatar
+                nameElement.textContent = `Hi, ${fullName}`; // Full name greeting
+            });
+
+
+            // Default link editing functionality
+            document.querySelectorAll(".link-item a").forEach(link => {
+                link.addEventListener("click", function () {
+                    window.open(link.href, "_blank");
+                });
+            });
+        }
+        );
+
+
+        // Dropdown for user profile with dynamic username from full name
+        document.addEventListener("DOMContentLoaded", function () {
+            // Fetch user data from localStorage
+            let user;
+            try {
+                user = JSON.parse(localStorage.getItem("user")) || { fullName: "User" };
+            } catch (e) {
+                console.error("Error parsing user from localStorage:", e);
+                user = { fullName: "User" };
+            }
+            const fullName = user.fullName || "User";
+
+            // Update user profile in user-info div
+            const avatarElement = document.getElementById("user-avatar");
+            const nameElement = document.getElementById("user-name");
+
+            if (avatarElement && nameElement) {
+                avatarElement.textContent = fullName.charAt(0).toUpperCase();
+                nameElement.textContent = `Hi, ${fullName}`;
+            } else {
+                console.error("Avatar or Name element not found in DOM");
+            }
+
+            // Create dropdown menu
+            const dropdown = document.createElement("div");
+            dropdown.classList.add("dropdown-menu");
+            dropdown.innerHTML = `
+        <ul>
+            <li>Profile</li>
+            <li>Settings</li>
+            <li>Logout</li>
+        </ul>
+    `;
+            dropdown.style.display = "none";
+
+            // Append dropdown inside user-info
+            const profile = document.querySelector(".user-info");
+            profile.appendChild(dropdown);
+
+            // Toggle dropdown when clicking the arrow
+            const dropdownArrow = document.querySelector(".dropdown-arrow");
+            dropdownArrow.addEventListener("click", function (event) {
+                event.stopPropagation(); // Prevent click event from propagating to document
+                dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+            });
+
+            // Close dropdown if clicking outside
+            document.addEventListener("click", function (event) {
+                if (!profile.contains(event.target)) {
+                    dropdown.style.display = "none";
+                }
+            });
+
+            // Add basic styling to dropdown (optional)
+            dropdown.style.position = "absolute";
+            dropdown.style.right = "10px";
+            dropdown.style.top = "50px";
+            dropdown.style.background = "#fff";
+            dropdown.style.border = "1px solid #ccc";
+            dropdown.style.padding = "10px";
+            dropdown.style.boxShadow = "0px 4px 6px rgba(0, 0, 0, 0.1)";
+            dropdown.style.borderRadius = "5px";
+            dropdown.style.width = "120px";
+
+            // Style dropdown items
+            dropdown.querySelectorAll("li").forEach(item => {
+                item.style.padding = "8px";
+                item.style.cursor = "pointer";
+                item.addEventListener("mouseenter", () => item.style.backgroundColor = "#f3f4f6");
+                item.addEventListener("mouseleave", () => item.style.backgroundColor = "white");
+            });
+
+            // Add functionality to "Logout"
+            dropdown.querySelector("li:last-child").addEventListener("click", function () {
+                localStorage.removeItem("user"); // Clear user data
+                location.reload(); // Refresh the page
+            });
+        });
+
+
+
+    </script>
+</body>
+
+</html>

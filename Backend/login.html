@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family:'Times New Roman', Times, serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            border-color: black;
+            background-color:wheat;
+            padding: 1rem;
+        }
+
+        .container {
+            width: 200%;
+            max-width: 400px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #def2e4;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .login-form {
+            background:whitesmoke;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            color:rebeccapurple;
+        }
+
+        input[type="email"],
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #deedbe;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #c0efbf;
+            box-shadow: 0 0 0 3px rgba(72, 73, 147, 0.1);
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        .forgot-password {
+            display: block;
+            text-align: right;
+            color: #1bb2db;
+            text-decoration: none;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin: 1rem 0;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+
+        
+        .captcha-container {
+            margin: 1rem 0;
+        }
+
+        .captcha-inner {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: #edb9e0;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .captcha-code {
+            flex-grow: 1;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #4b5563;
+            letter-spacing: 0.25rem;
+            background: linear-gradient(135deg, #6366f1, #818cf8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            user-select: none;
+        }
+
+        .refresh-button {
+            background: none;
+            border: none;
+            color: #78daf0;
+            cursor: pointer;
+            padding: 0.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .refresh-button:hover {
+            transform: rotate(180deg);
+        }
+
+        .refresh-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #68b4d5;
+            color: white;
+            border: none;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 1rem;
+        }
+
+        .login-button:hover {
+            background-color:lightslategray;
+        }
+
+        .divider {
+            position: relative;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .divider::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 1px;
+            background: #e5e7eb;
+        }
+
+        .divider span {
+            position: relative;
+            background: white;
+            padding: 0 0.75rem;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .google-button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: white;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            color: #5673a1;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .google-button:hover {
+            background-color: #c1e5d5;
+        }
+
+        .google-button img {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.5rem;
+        }
+
+        .create-account {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .create-account a {
+            color: #05e3be;
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form class="login-form" id="loginForm">
+            <div class="logo"><h2><img src="bluestock.logo.jpg" style="width: 100%;height: 100%;"></h2></div>
+            <div class="form-group">
+                <label for="email">✉️ Email Address</label>
+                <input type="email" id="email" required placeholder="johndoe@gmail.com">
+            </div>
+
+            <div class="form-group">
+                <label for="password">🔒 Password</label>
+                <div class="password-container">
+                    <input type="password" id="password" required>
+                    <button type="button" class="password-toggle" id="passwordToggle">
+                        👁️
+                    </button>
+                </div>
+                <a href="#" class="forgot-password">❓ Forgot Password?</a>
+            </div>
+
+            <div class="captcha-container">
+                <div class="captcha-inner">
+                    <div class="captcha-code" id="captchaBox"></div>
+                    <button type="button" class="refresh-button" id="refreshCaptcha" title="Refresh CAPTCHA">
+                        <svg class="refresh-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <input type="text" 
+                       id="captchaInput" 
+                       placeholder="Enter the code above" 
+                       required 
+                       class="mt-2">
+            </div>
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="remember">
+                <label for="remember">Keep me signed in</label>
+            </div>
+
+
+            <button type="submit" class="login-button">➡️ Login</button>
+
+            <div class="divider">
+                <span>✨ or sign in with</span>
+            </div>
+
+            <button type="button" class="google-button">
+                <img src="https://cdn-icons-png.flaticon.com/128/300/300221.png" alt="Google logo">
+                Continue with Google
+            </button>
+
+            <div class="create-account">
+                <a href="register.html">👤 Create an account</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const passwordToggle = document.getElementById('passwordToggle');
+        const passwordInput = document.getElementById('password');
+
+        passwordToggle.addEventListener('click', () => {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordToggle.textContent = '👁️';
+            } else {
+                passwordInput.type = 'password';
+                passwordToggle.textContent = '👁️';
+            }
+        });
+
+        let captchaText = '';
+        function generateCaptcha() {
+            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            captchaText = '';
+            for (let i = 0; i < 6; i++) {
+                captchaText += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('captchaBox').textContent = captchaText;
+        }
+
+        document.getElementById('refreshCaptcha').addEventListener('click', (e) => {
+            e.preventDefault();
+            generateCaptcha();
+        });
+
+        generateCaptcha();
+
+        const loginForm = document.getElementById('loginForm');
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = passwordInput.value;
+            const remember = document.getElementById('remember').checked;
+            const captchaInput = document.getElementById('captchaInput').value;
+            if (captchaInput.toUpperCase() !== captchaText) {
+                alert('Invalid CAPTCHA. Please try again.');
+                generateCaptcha();
+                document.getElementById('captchaInput').value = '';
+                return;
+            }
+            console.log('Login attempt:', { 
+                email, 
+                password, 
+                remember
+            });
+        });
+
+    </script>
+</body>
+</html>
+

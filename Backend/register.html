@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color:moccasin;
+            padding: 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background:lightgray;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(230, 228, 237, 0.1);
+        }
+
+        .title {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color:deeppink;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.875rem;
+            color:purple;
+            margin-bottom: 0.5rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid lavender;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+        }
+
+        .register-button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color:blue;
+            color: white;
+            border: none;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .register-button:hover {
+            background-color:gold;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .login-link a {
+            color:lightseagreen;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">📝 Create an Account</div>
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="name">👤 Full Name</label>
+                <input type="text" id="name" required placeholder="John Doe">
+            </div>
+
+            <div class="form-group">
+                <label for="email">📧 Email Address</label>
+                <input type="email" id="email" required placeholder="johndoe@gmail.com">
+            </div>
+
+            <div class="form-group">
+                <label for="password">🔑 Password</label>
+                <input type="password" id="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">🔒 Confirm Password</label>
+                <input type="password" id="confirmPassword" required>
+            </div>
+
+            <button type="submit" class="register-button">🆕 Register</button>
+        </form>
+
+        <div class="login-link">
+            🔹 Already have an account? <a href="login.html">➡️ Login</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return;
+            }
+            localStorage.setItem("registeredName", name);
+            localStorage.setItem("registeredEmail", email);
+            localStorage.setItem("registeredPassword", password);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <!-- Add Google Identity Services Library -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+            padding: 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #6366f1;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .login-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            color: #374151;
+        }
+
+        input[type="email"],
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        .forgot-password {
+            display: block;
+            text-align: right;
+            color: #6366f1;
+            text-decoration: none;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin: 1rem 0;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+
+        .captcha-container {
+            margin: 1rem 0;
+        }
+
+        .captcha-inner {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: #f9fafb;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .captcha-code {
+            flex-grow: 1;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #4b5563;
+            letter-spacing: 0.25rem;
+            background: linear-gradient(135deg, #6366f1, #818cf8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            user-select: none;
+        }
+
+        .refresh-button {
+            background: none;
+            border: none;
+            color: #6366f1;
+            cursor: pointer;
+            padding: 0.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .refresh-button:hover {
+            transform: rotate(180deg);
+        }
+
+        .refresh-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #6366f1;
+            color: white;
+            border: none;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 1rem;
+        }
+
+        .login-button:hover {
+            background-color: #4f46e5;
+        }
+
+        .divider {
+            position: relative;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .divider::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 1px;
+            background: #e5e7eb;
+        }
+
+        .divider span {
+            position: relative;
+            background: white;
+            padding: 0 0.75rem;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .google-button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: white;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            color: #374151;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .google-button:hover {
+            background-color: #f9fafb;
+        }
+
+        .google-button img {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.5rem;
+        }
+
+        .create-account {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .create-account a {
+            color: #6366f1;
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+
+        /* Custom Popup Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .popup button {
+            padding: 10px 20px;
+            background-color: #6366f1;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .popup button:hover {
+            background-color: #4f46e5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form class="login-form" id="loginForm">
+            <div class="logo"><h2><img src="logo.jpg" style="width: 100%;height: 100%;"></h2></div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required placeholder="johndoe@gmail.com">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-container">
+                    <input type="password" id="password" required>
+                    <button type="button" class="password-toggle" id="passwordToggle">
+                        👁
+                    </button>
+                </div>
+                <a href="forgetpassword.html" class="forgot-password">Forgot Password?</a>
+            </div>
+
+            <div class="captcha-container" id="captchaContainer">
+                <div class="captcha-inner">
+                    <div class="captcha-code" id="captchaBox"></div>
+                    <button type="button" class="refresh-button" id="refreshCaptcha" title="Refresh CAPTCHA">
+                        <svg class="refresh-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <input type="text" 
+                       id="captchaInput" 
+                       placeholder="Enter the code above" 
+                       required 
+                       class="mt-2">
+            </div>
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="remember">
+                <label for="remember">Keep me signed in</label>
+            </div>
+
+            <button type="submit" class="login-button">Login</button>
+
+            <div class="divider">
+                <span>or sign in with</span>
+            </div>
+
+            <!-- Google Sign-In Button -->
+            <div id="g_id_onload"
+                 data-client_id="YOUR_GOOGLE_CLIENT_ID"
+                 data-login_uri="http://localhost:5500" 
+                 data-auto_prompt="false">
+            </div>
+            <div class="g_id_signin"
+                 data-type="standard"
+                 data-size="large"
+                 data-theme="outline"
+                 data-text="sign_in_with"
+                 data-shape="rectangular"
+                 data-logo_alignment="left">
+            </div>
+
+            <div class="create-account">
+                <a href="register.html">Create an account</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Custom Popup -->
+    <div class="popup-overlay" id="popupOverlay"></div>
+    <div class="popup" id="popup">
+        <p>Login successful!</p>
+        <button onclick="closePopup()">OK</button>
+    </div>
+
+    <script>
+        // Password toggle visibility
+        const passwordToggle = document.getElementById('passwordToggle');
+        const passwordInput = document.getElementById('password');
+
+        passwordToggle.addEventListener('click', () => {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordToggle.textContent = '👁';
+            } else {
+                passwordInput.type = 'password';
+                passwordToggle.textContent = '👁';
+            }
+        });
+
+        // CAPTCHA generation
+        let captchaText = '';
+        function generateCaptcha() {
+            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            captchaText = '';
+            for (let i = 0; i < 6; i++) {
+                captchaText += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('captchaBox').textContent = captchaText;
+        }
+
+        document.getElementById('refreshCaptcha').addEventListener('click', (e) => {
+            e.preventDefault();
+            generateCaptcha();
+        });
+
+        generateCaptcha();
+
+        // Login form submission
+        const loginForm = document.getElementById('loginForm');
+        const popup = document.getElementById('popup');
+        const popupOverlay = document.getElementById('popupOverlay');
+        const captchaContainer = document.getElementById('captchaContainer');
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = passwordInput.value;
+            const captchaInput = document.getElementById('captchaInput').value;
+
+            // Retrieve user data from localStorage
+            const user = JSON.parse(localStorage.getItem('user'));
+
+            // Validate CAPTCHA
+            if (captchaInput.toUpperCase() !== captchaText) {
+                alert('Invalid CAPTCHA. Please try again.');
+                generateCaptcha();
+                document.getElementById('captchaInput').value = '';
+                return;
+            }
+
+            // Validate login credentials
+            if (user && user.email === email && user.password === password) {
+                // Show custom popup
+                popup.style.display = 'block';
+                popupOverlay.style.display = 'block';
+
+                // Hide CAPTCHA container
+                captchaContainer.style.display = 'none';
+
+                // Redirect to home page after 2 seconds
+                setTimeout(() => {
+                    window.location.href = "home.html";
+                }, 2000);
+            } else {
+                alert("Invalid email or password. Please try again.");
+            }
+        });
+
+        // Close popup
+        function closePopup() {
+            popup.style.display = 'none';
+            popupOverlay.style.display = 'none';
+        }
+
+        // Handle Google Sign-In response
+        function handleCredentialResponse(response) {
+            const responsePayload = JSON.parse(atob(response.credential.split('.')[1]));
+
+            console.log("Google Sign-In Response:", responsePayload);
+
+            const userName = responsePayload.name;
+            const userEmail = responsePayload.email;
+
+            // Show custom popup
+            popup.style.display = 'block';
+            popupOverlay.style.display = 'block';
+
+            // Hide CAPTCHA container
+            captchaContainer.style.display = 'none';
+
+            // Redirect to home page after 2 seconds
+            setTimeout(() => {
+                window.location.href = "home.html";
+            }, 2000);
+        }
+
+        window.handleCredentialResponse = handleCredentialResponse;
+    </script>
+</body>
+</html>
