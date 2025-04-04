@@ -9,14 +9,7 @@ This is the frontend of the Bluestock application, which provides a user interfa
 - Dashboard with Sidebar Navigation
 - Responsive Design
 
-## Folder Structure
-Frontend/ ├── index.html # Login Page ├── register.html 
-# User Registration Page ├── forgetpassword.html
-# Forget Password Page ├── reset-password.html 
-# Reset Password Page ├── verify-otp.html
-# OTP Verification Page ├── home.html
-# Dashboard Page ├── styles.css 
-# Global Stylesheet
+
 
 ## Prerequisites
 - A modern web browser (e.g., Chrome, Firefox)
@@ -76,16 +69,7 @@ Here are two separate README.md files for the Frontend and Backend based on the 
 Frontend README.md
 Frontend/ ├── index.html # Login Page ├── register.html # User Registration Page ├── forgetpassword.html # Forget Password Page ├── reset-password.html # Reset Password Page ├── verify-otp.html # OTP Verification Page ├── home.html # Dashboard Page ├── styles.css # Global Stylesheet
 
-Firefox
-Backend README.md
-Backend/ ├── server.js
-# Main server file ├── routes/ │ └── User/ │ └── user.js
-# User-related routes ├── controller/ │ └── Authcontroller.js 
-# Authentication controllers ├── middleware/ │ ├── AuthMiddleware.js
-# JWT Authentication middleware │ └── ValidatorMddleware.js 
-# Validation middleware ├── models/ │ └── User.js 
-# User model (empty in provided files) ├── config/ │ ├── db.js # MongoDB connection │ └── emailconfig.js 
-# Email configuration ├── .env # Environment variables
+
 
 
 ## Prerequisites
